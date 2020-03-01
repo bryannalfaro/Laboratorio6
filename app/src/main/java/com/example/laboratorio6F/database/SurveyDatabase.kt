@@ -5,6 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
+/**
+ * @author Bryann Alfaro
+ * Database
+ */
 @Database(entities = [EncuestaEntity::class,PreguntaEntity::class,RespuestaEntity::class],version = 1,exportSchema = false)
 abstract class SurveyDatabase:RoomDatabase (){
     abstract val surveyDao:SurveyDao

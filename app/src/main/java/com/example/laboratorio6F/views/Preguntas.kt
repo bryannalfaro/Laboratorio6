@@ -32,7 +32,7 @@ class Preguntas : Fragment() {
     ): View? {
         //inflate the view
         val bindingPreguntas=DataBindingUtil.inflate<PreguntasFragmentBinding>(inflater,R.layout.preguntas_fragment,container,false)
-        var options= arrayOf("Texto","Numero","Raiting")
+        var options= arrayOf("Texto","Numero","Raiting")//array for the spinner text
         setHasOptionsMenu(true)
 
         bindingPreguntas.spinner.adapter=ArrayAdapter(requireActivity(),R.layout.support_simple_spinner_dropdown_item,options)
@@ -83,8 +83,10 @@ class Preguntas : Fragment() {
             }
 
         }
+        //Instantiate the application and the datasource
         val application= requireNotNull(this.activity!!).application
         val dataSource= SurveyDatabase.getInstance(application).surveyDao
+        //Make the factory
         val encuestaFactory= EncuestaViewModelFactory(dataSource,application)
         viewModel=ViewModelProviders.of(activity!!,encuestaFactory).get(EncuestaViewModel::class.java)
         viewModel.onAddQuestionRequested(texto,seleccion)

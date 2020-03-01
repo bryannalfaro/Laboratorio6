@@ -35,11 +35,14 @@ class Encuesta : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        //Instantiate the application and the DataBase
         val application= requireNotNull(this.activity).application
         val dataSource= SurveyDatabase.getInstance(application).surveyDao
+
+        //Make the factories
         val encuestaFactory= EncuestaViewModelFactory(dataSource,application)
         val respuestaFactory= ResultadoViewModelFactory(dataSource,application)
+
         //inflate the view
         bindingEncuesta = DataBindingUtil.inflate(inflater, R.layout.encuesta_fragment, container, false)
 

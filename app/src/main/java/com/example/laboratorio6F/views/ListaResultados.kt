@@ -31,8 +31,11 @@ class ListaResultados : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
 
         super.onActivityCreated(savedInstanceState)
+        //Instantiate the application and the Data Source
         val application= requireNotNull(this.activity).application
         val dataSource= SurveyDatabase.getInstance(application).surveyDao
+
+        //Factory for the list
         val ListaFactory= ListaResultadosViewModelFactory(dataSource,application)
         viewModel = ViewModelProviders.of(activity!!,ListaFactory).get(ListaResultadosViewModel::class.java)
         // TODO: Use the ViewModel

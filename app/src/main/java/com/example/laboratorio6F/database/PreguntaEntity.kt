@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @author Bryann Alfaro
+ * Entidad para las preguntas
+ */
 @Entity(tableName = "question_table")
 data class PreguntaEntity(
     @PrimaryKey(autoGenerate = true)

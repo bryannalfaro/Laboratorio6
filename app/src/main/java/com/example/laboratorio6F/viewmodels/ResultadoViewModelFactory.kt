@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.laboratorio6F.database.SurveyDao
 
+/**
+ * @author Bryann Alfaro
+ * Factory for the results
+ */
 class ResultadoViewModelFactory(
     private val dataSource: SurveyDao,
     private val application: Application

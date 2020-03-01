@@ -15,6 +15,7 @@ import kotlinx.coroutines.*
  * ViewModel for the encuesta
  */
 class EncuestaViewModel (val database: SurveyDao, application: Application): AndroidViewModel(application) {
+    //Make the job and the UI scope
     private var viewModelJob= Job()
     private val uiScope= CoroutineScope(Dispatchers.Main+viewModelJob)
 
@@ -59,7 +60,7 @@ class EncuestaViewModel (val database: SurveyDao, application: Application): And
     fun addPregunta(pregunta:String){
         preguntaMade=pregunta
     }
-
+    //Insert the question that is requested
     fun onAddQuestionRequested(pregunta: String,tipo:String){
         uiScope.launch {
             val pregunta=PreguntaEntity()
@@ -78,5 +79,6 @@ class EncuestaViewModel (val database: SurveyDao, application: Application): And
     override fun onCleared() {
         super.onCleared()
         Log.i("EncuestaViewModel","OnCleared Model")
+        viewModelJob.cancel()
     }
 }

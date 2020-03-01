@@ -6,6 +6,10 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 
+/**
+ * @author Bryann Alfaro
+ * Entidad para las respuestas
+ */
 @Entity(tableName = "answer_table", foreignKeys = [ForeignKey(entity =EncuestaEntity::class,
     parentColumns = ["id"], childColumns = ["pool_id"], onDelete = CASCADE),
     ForeignKey(entity =PreguntaEntity::class, parentColumns = ["id"], childColumns = ["question_id"],

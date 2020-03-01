@@ -6,6 +6,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+/**
+ * @author Bryann Alfaro
+ * DAO para las querys
+ */
 @Dao
 interface SurveyDao{
 

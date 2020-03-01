@@ -4,6 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @author Bryann Alfaro
+ * Entidad para crear la encuesta
+ */
+
 @Entity(tableName = "poll_table")
 data class EncuestaEntity(
     @PrimaryKey(autoGenerate = true)

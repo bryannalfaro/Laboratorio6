@@ -54,7 +54,7 @@ class Resultado : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.delete_menu,menu)
+        inflater?.inflate(R.menu.delete_menu,menu)//Inflate with the options
     }
     //when the button save is pressed
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
