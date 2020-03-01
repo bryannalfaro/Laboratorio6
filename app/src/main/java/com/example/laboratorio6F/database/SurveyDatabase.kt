@@ -1,4 +1,4 @@
-package com.example.laboratorio6.database
+package com.example.laboratorio6F.database
 
 import android.content.Context
 import androidx.room.Database

@@ -1,4 +1,4 @@
-package com.example.laboratorio6.database
+package com.example.laboratorio6F.database
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

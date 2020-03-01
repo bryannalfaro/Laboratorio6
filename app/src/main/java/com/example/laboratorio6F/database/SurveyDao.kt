@@ -1,4 +1,4 @@
-package com.example.laboratorio6.database
+package com.example.laboratorio6F.database
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +19,7 @@ interface SurveyDao{
     fun getAllResponses():LiveData<List<RespuestaEntity>>
 
     @Query("SELECT * FROM question_table ")
-    fun getAllPreguntas():MutableList<PreguntaEntity>
+    fun getAllPreguntas():LiveData<List<PreguntaEntity>>
 
     @Query("SELECT COUNT(id) FROM poll_table")
     fun getNumberOfSurveys():Long?

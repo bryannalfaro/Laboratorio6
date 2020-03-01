@@ -1,12 +1,15 @@
 package com.example.laboratorio6F.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import com.example.laboratorio6F.database.SurveyDao
 
 /**
  * @author Bryann
  * ViewModel for the results
  */
-class ResultadoViewModel : ViewModel() {
+class ResultadoViewModel  (val database: SurveyDao, application: Application): AndroidViewModel(application) {
 
 
      var cantidadSurveys:Int=0

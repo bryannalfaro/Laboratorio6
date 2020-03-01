@@ -2,15 +2,17 @@ package com.example.laboratorio6F.views
 
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
+import android.widget.*
 import androidx.databinding.DataBindingUtil
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.laboratorio6F.R
+import com.example.laboratorio6F.database.SurveyDatabase
 import com.example.laboratorio6F.databinding.PreguntasFragmentBinding
 import com.example.laboratorio6F.viewmodels.EncuestaViewModel
+import com.example.laboratorio6F.viewmodels.EncuestaViewModelFactory
 
 /**
  * @author Bryann Alfaro
@@ -30,9 +32,25 @@ class Preguntas : Fragment() {
     ): View? {
         //inflate the view
         val bindingPreguntas=DataBindingUtil.inflate<PreguntasFragmentBinding>(inflater,R.layout.preguntas_fragment,container,false)
-
+        var options= arrayOf("Texto","Numero","Raiting")
         setHasOptionsMenu(true)
 
+        bindingPreguntas.spinner.adapter=ArrayAdapter(requireActivity(),R.layout.support_simple_spinner_dropdown_item,options)
+        bindingPreguntas.spinner.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                Toast.makeText(activity,"Item",Toast.LENGTH_SHORT).show() //To change body of created functions use File | Settings | File Templates.
+            }
+
+        }
         return bindingPreguntas.root
     }
 
@@ -46,9 +64,31 @@ class Preguntas : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         val edit:EditText = view!!.findViewById(R.id.editText)
+        val spinnerSelection:Spinner=view!!.findViewById(R.id.spinner)
         texto=edit.text.toString()
-        viewModel=ViewModelProviders.of(activity!!).get(EncuestaViewModel::class.java)
-        viewModel.addPregunta(texto)
+        var seleccion:String=""
+        spinnerSelection.onItemSelectedListener=object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+               seleccion=spinnerSelection.getItemAtPosition(position).toString()
+
+            }
+
+        }
+        val application= requireNotNull(this.activity!!).application
+        val dataSource= SurveyDatabase.getInstance(application).surveyDao
+        val encuestaFactory= EncuestaViewModelFactory(dataSource,application)
+        viewModel=ViewModelProviders.of(activity!!,encuestaFactory).get(EncuestaViewModel::class.java)
+        viewModel.onAddQuestionRequested(texto,seleccion)
+        Toast.makeText(activity,"Se agrego en DB",Toast.LENGTH_SHORT).show()
         edit.setText("")
         view!!.findNavController().navigate(R.id.action_preguntas_to_principal)
         return super.onOptionsItemSelected(item)

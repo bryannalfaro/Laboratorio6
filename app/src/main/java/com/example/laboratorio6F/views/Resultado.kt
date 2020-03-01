@@ -29,6 +29,7 @@ class Resultado : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         //Inflate the view
         bindinResultado=DataBindingUtil.inflate<ResultadoFragmentBinding>(inflater,R.layout.resultado_fragment,container,false)
 

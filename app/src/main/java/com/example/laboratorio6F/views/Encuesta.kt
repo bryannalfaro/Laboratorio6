@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.laboratorio6F.R
+import com.example.laboratorio6F.database.SurveyDatabase
 import com.example.laboratorio6F.databinding.EncuestaFragmentBinding
 import com.example.laboratorio6F.viewmodels.EncuestaViewModel
+import com.example.laboratorio6F.viewmodels.EncuestaViewModelFactory
 import com.example.laboratorio6F.viewmodels.ResultadoViewModel
+import com.example.laboratorio6F.viewmodels.ResultadoViewModelFactory
 
 /**
  * @author Bryann Alfaro
@@ -32,12 +35,17 @@ class Encuesta : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val application= requireNotNull(this.activity).application
+        val dataSource= SurveyDatabase.getInstance(application).surveyDao
+        val encuestaFactory= EncuestaViewModelFactory(dataSource,application)
+        val respuestaFactory= ResultadoViewModelFactory(dataSource,application)
         //inflate the view
         bindingEncuesta = DataBindingUtil.inflate(inflater, R.layout.encuesta_fragment, container, false)
 
         //init the viewModel
-        viewModel = ViewModelProviders.of(activity!!).get(EncuestaViewModel::class.java)
-        viewModelR=ViewModelProviders.of(activity!!).get(ResultadoViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!,encuestaFactory).get(EncuestaViewModel::class.java)
+        viewModelR=ViewModelProviders.of(activity!!,respuestaFactory).get(ResultadoViewModel::class.java)
         bindingEncuesta.encuestaModel=viewModel
 
 

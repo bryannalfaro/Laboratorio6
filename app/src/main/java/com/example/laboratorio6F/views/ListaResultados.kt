@@ -7,7 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.laboratorio6F.R
+import com.example.laboratorio6F.database.SurveyDatabase
+import com.example.laboratorio6F.viewmodels.EncuestaViewModelFactory
 import com.example.laboratorio6F.viewmodels.ListaResultadosViewModel
+import com.example.laboratorio6F.viewmodels.ListaResultadosViewModelFactory
 
 
 class ListaResultados : Fragment() {
@@ -26,8 +29,12 @@ class ListaResultados : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ListaResultadosViewModel::class.java)
+        val application= requireNotNull(this.activity).application
+        val dataSource= SurveyDatabase.getInstance(application).surveyDao
+        val ListaFactory= ListaResultadosViewModelFactory(dataSource,application)
+        viewModel = ViewModelProviders.of(activity!!,ListaFactory).get(ListaResultadosViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
