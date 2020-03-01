@@ -6,11 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.laboratorio6F.R
 import com.example.laboratorio6F.database.SurveyDatabase
-import com.example.laboratorio6F.viewmodels.EncuestaViewModelFactory
-import com.example.laboratorio6F.viewmodels.ListaResultadosViewModel
-import com.example.laboratorio6F.viewmodels.ListaResultadosViewModelFactory
+import com.example.laboratorio6F.databinding.ListaResultadosFragmentBinding
+import com.example.laboratorio6F.viewmodels.*
 
 
 class ListaResultados : Fragment() {
@@ -19,26 +19,25 @@ class ListaResultados : Fragment() {
         fun newInstance() = ListaResultados()
     }
 
-    private lateinit var viewModel: ListaResultadosViewModel
+    private lateinit var viewModel: ResultadoViewModel
+    private lateinit var bindingList:ListaResultadosFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.lista_resultados_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-
-        super.onActivityCreated(savedInstanceState)
-        //Instantiate the application and the Data Source
+        bindingList=DataBindingUtil.inflate(inflater,R.layout.lista_resultados_fragment,container,false)
         val application= requireNotNull(this.activity).application
         val dataSource= SurveyDatabase.getInstance(application).surveyDao
 
         //Factory for the list
-        val ListaFactory= ListaResultadosViewModelFactory(dataSource,application)
-        viewModel = ViewModelProviders.of(activity!!,ListaFactory).get(ListaResultadosViewModel::class.java)
-        // TODO: Use the ViewModel
+        val Resultados= ResultadoViewModelFactory(dataSource,application)
+        viewModel = ViewModelProviders.of(activity!!,Resultados).get(ResultadoViewModel::class.java)
+        bindingList.Texto.setText(viewModel.returnAll().toString())
+
+        return bindingList.root
     }
+
+
 
 }

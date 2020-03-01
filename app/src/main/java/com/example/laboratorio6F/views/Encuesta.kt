@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.laboratorio6F.R
@@ -63,10 +64,13 @@ class Encuesta : Fragment() {
 
             if(ratingShow>=1){
                 //set the rating
-                viewModelR.endSurvey()//increment the value for the survey
-                var rateValue=bindingEncuesta.ratingBar.rating
 
-                viewModelR.rating(rateValue)//get the rating for the ratinbar
+                viewModelR.endSurvey()//increment the value for the survey
+                //get the rating for the ratinbar
+                var rateValue=bindingEncuesta.ratingBar.rating
+                Toast.makeText(activity,"$rateValue",Toast.LENGTH_SHORT).show()
+
+                viewModelR.rating(rateValue)
                 viewModelR.establecerRespuesta(rateValue.toString())//add to the list of answers
 
                 //navigate to results

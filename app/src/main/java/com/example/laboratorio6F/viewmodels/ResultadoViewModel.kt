@@ -12,8 +12,9 @@ import com.example.laboratorio6F.database.SurveyDao
 class ResultadoViewModel  (val database: SurveyDao, application: Application): AndroidViewModel(application) {
 
 
-     var cantidadSurveys:Int=0
+     var cantidadSurveys:Float=0.0f
      var promedioRating:Float=0.0f
+    var ratingbarsa:Float=0.0f
     private var respuestas=ArrayList<String>()
 
 
@@ -21,7 +22,8 @@ class ResultadoViewModel  (val database: SurveyDao, application: Application): A
         cantidadSurveys++
     }
     fun rating(ratingbar:Float){
-        promedioRating=(promedioRating+ratingbar)/cantidadSurveys
+        ratingbarsa=ratingbarsa+ratingbar
+        promedioRating=((ratingbarsa)/cantidadSurveys)
     }
 
     fun returnAll():ArrayList<String>{
