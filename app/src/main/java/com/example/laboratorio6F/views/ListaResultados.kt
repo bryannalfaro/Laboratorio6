@@ -12,7 +12,10 @@ import com.example.laboratorio6F.database.SurveyDatabase
 import com.example.laboratorio6F.databinding.ListaResultadosFragmentBinding
 import com.example.laboratorio6F.viewmodels.*
 
-
+/**
+ * @author Bryann
+ * Fragment for the List of Results
+ */
 class ListaResultados : Fragment() {
 
     companion object {
